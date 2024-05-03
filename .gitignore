@@ -1,6 +1,8 @@
 # Created by https://www.toptal.com/developers/gitignore/api/svelte,go,intellij,node,deno,zig
 # Edit at https://www.toptal.com/developers/gitignore?templates=svelte,go,intellij,node,deno,zig
 
+.env
+
 ### Deno ###
 /.idea/
 /.vscode/
