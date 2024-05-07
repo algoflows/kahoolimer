@@ -23,7 +23,7 @@ async function getQuizzes() {
 }
 
 function connect() {
-	websocket = new WebSocket("ws://localhost:3000/ws/1");
+	websocket = new WebSocket("ws://localhost:3000/ws");
 
 	websocket.onopen = () => {
 		console.log("Connected to WebSocket");
@@ -70,17 +70,23 @@ onMount(() => {
 </script>
 
 <div>
-  <h1>Hello world!</h1>
+  <h1 class="text-4xl font-bold">Hello world!</h1>
 
-  <button on:click={getQuizzes}>Get Quizzes</button>
-  
-  <pre>
-    {#each quizzes as quiz}
-      <pre>{JSON.stringify(quiz, null, 2)}</pre>
-    {/each}
-  </pre>
 
   <!-- Add a button to send a test socket message -->
-  <button on:click={() => sendMessage('Test message')}>Send Test Message</button>
+  <div>
+  	<button on:click={() => sendMessage('Test message')}>Send Test Message</button>
+  </div>
+
+  <div>
+    <button on:click={getQuizzes}>Get Quizzes</button>
+  </div>
+  
+  <ul class="flex flex-col gap-y-2">
+    {#each quizzes as quiz}
+      <li>{JSON.stringify(quiz, null, 2)}</li>
+    {/each}
+  </ul>
+
 
 </div>

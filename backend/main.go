@@ -26,7 +26,7 @@ func main() {
 
 	app.Get("/", index)
 	app.Get("/api/quizzes", getQuizzes)
-	app.Get("/ws/:id", getWebsocketId())
+	app.Get("/ws", getWebsocketId())
 
 	log.Fatal(app.Listen(":3000"))
 }
