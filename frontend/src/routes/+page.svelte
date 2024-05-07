@@ -1,7 +1,8 @@
 <script lang="ts">
+import QuizCard from "$lib/components/QuizCard.svelte";
 import { onMount } from "svelte";
 
-let quizzes: unknown[] = []; // Change type to unknown[]
+let quizzes: { id: string; name: string }[] = [];
 let websocket: WebSocket;
 
 async function getQuizzes() {
@@ -84,9 +85,9 @@ onMount(() => {
   
   <ul class="flex flex-col gap-y-2">
     {#each quizzes as quiz}
-      <li>{JSON.stringify(quiz, null, 2)}</li>
+      <li>
+        <QuizCard name={quiz.name} id={quiz.id} />
+      </li>
     {/each}
   </ul>
-
-
 </div>

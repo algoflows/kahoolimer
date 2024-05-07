@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"encoding/json"
 	"log"
 	"os"
 	"time"
@@ -88,4 +89,22 @@ func getWebsocketId() func(c *fiber.Ctx) error {
 			log.Printf("Received message: %s", msg)
 		}
 	})
+}
+
+func (c *NetService) SendPacket(connection *websocket.Conn, packet any) error {
+	bytes, err := c.PacketToBytes(packet)
+	if err != nil {
+		return err
+	}
+	return connection.WriteMessage(websocket.BinaryMessage, bytes)
+}
+
+func (c *NetService) PacketToBytes(packet any) ([]byte, error) {
+	var packetId uint8 = 0
+	bytes, err := json.Marshal(packet)
+	if err != nil {
+		return nil, err
+	}
+	final := append([]byte{packetId}, bytes...)
+	return final, nil
 }
